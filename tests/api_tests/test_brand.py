@@ -12,7 +12,7 @@ class TestBrand:
         with allure.step('Checking response code'):
             assert response.status_code == 200
         with allure.step('Checking of response content'):
-            assert len(body['brands']) > 0
+            assert len(body.get('brands')) > 0
 
     @allure.title('Put to all brands list')
     @allure.description('Test with expectation of response code 200, in case, when this is an appropriate way in team')
@@ -22,5 +22,5 @@ class TestBrand:
         with allure.step('Checking response code'):
             assert response.status_code == 200
         with allure.step('Checking of response content'):
-            assert body['message'] == 'This request method is not supported.'
-            assert body['responseCode'] == 405
+            assert body.get('message') == 'This request method is not supported.'
+            assert body.get('responseCode') == 405

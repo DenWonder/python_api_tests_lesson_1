@@ -12,7 +12,7 @@ class TestLogin:
         with allure.step('Checking response code'):
             assert response.status_code == 200
         with allure.step('Checking of response content'):
-            assert body['message'] == 'User exists!'
+            assert body.get('message') == 'User exists!'
 
 
     @pytest.mark.parametrize(
@@ -28,8 +28,8 @@ class TestLogin:
         with allure.step('Checking response code'):
             assert response.status_code == 200
         with allure.step('Checking of response content'):
-            assert body['responseCode'] == 400
-            assert body['message'] == "Bad request, email or password parameter is missing in POST request."
+            assert body.get('responseCode') == 400
+            assert body.get('message') == "Bad request, email or password parameter is missing in POST request."
 
 
     @pytest.mark.xfail(reason='Bug AEC-1236 Incorrect response code on delete request to login')
@@ -39,7 +39,7 @@ class TestLogin:
         with allure.step('Checking response code'):
             assert response.status_code == 405
         with allure.step('Checking of response content'):
-            assert body['message'] == 'This request method is not supported.'
+            assert body.get('message') == 'This request method is not supported.'
 
 
     @pytest.mark.parametrize(
@@ -55,5 +55,5 @@ class TestLogin:
         with allure.step('Checking response code'):
             assert response.status_code == 200
         with allure.step('Checking of response content'):
-            assert body['responseCode'] == 404
-            assert body['message'] == "User not found!"
+            assert body.get('responseCode') == 404
+            assert body.get('message') == "User not found!"
